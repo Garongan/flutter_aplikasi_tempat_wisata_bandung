@@ -1,16 +1,7 @@
 # flutter_aplikasi_tempat_wisata_bandung
 
-A new Flutter project.
+Mobile app to show vacation destination in bandung
 
-## Getting Started
+[design](https://www.figma.com/design/s9dbvLDXUTV7rx7i5U4V5p/aplikasi-tempat-wisata-bandung?node-id=0-1&node-type=canvas&t=txw4HXHhkpAGh5Xn-0)
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+[preview](video.mp4)
