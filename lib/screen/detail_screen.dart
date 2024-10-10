@@ -39,7 +39,8 @@ class DetailScreen extends StatelessWidget {
                         'Lembang',
                         style: TextStyle(
                             color: Color.fromRGBO(29, 170, 171, 1),
-                            fontSize: 15),
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500),
                       )
                     ],
                   )
@@ -75,8 +76,9 @@ class DetailScreen extends StatelessWidget {
                           Text(
                             'Open Everyday',
                             style: TextStyle(
-                                color: Color.fromRGBO(29, 170, 171, 1),
-                                fontSize: 12),
+                                color: Colors.black,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500),
                           )
                         ],
                       ),
@@ -106,8 +108,9 @@ class DetailScreen extends StatelessWidget {
                           Text(
                             '09.00 - 20.00',
                             style: TextStyle(
-                                color: Color.fromRGBO(29, 170, 171, 1),
-                                fontSize: 12),
+                                color: Colors.black,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500),
                           )
                         ],
                       ),
@@ -137,14 +140,27 @@ class DetailScreen extends StatelessWidget {
                           Text(
                             'Rp. 25.000',
                             style: TextStyle(
-                                color: Color.fromRGBO(29, 170, 171, 1),
-                                fontSize: 12),
+                                color: Colors.black,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500),
                           )
                         ],
                       ),
                     ),
                   ),
                 ],
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(
+                top: yGap,
+                left: xPadding,
+                right: xPadding,
+              ),
+              child: const Text(
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum',
+                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+                textAlign: TextAlign.justify,
               ),
             )
           ],
