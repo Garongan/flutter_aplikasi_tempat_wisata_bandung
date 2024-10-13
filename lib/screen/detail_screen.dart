@@ -30,150 +30,8 @@ class DetailScreen extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.only(
-                    top: yGap,
-                  ),
-                  child: const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        'Farm House Lembang',
-                        style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.w500),
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.location_on_outlined,
-                            size: 15,
-                            color: Color.fromRGBO(29, 170, 171, 1),
-                          ),
-                          Text(
-                            'Lembang',
-                            style: TextStyle(
-                                color: Color.fromRGBO(29, 170, 171, 1),
-                                fontSize: 15,
-                                fontWeight: FontWeight.w500),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(
-                    top: yGap,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Expanded(
-                        child: Container(
-                          padding: const EdgeInsets.only(
-                            left: 10,
-                            top: 20,
-                            bottom: 20,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(7),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Icon(
-                                Icons.calendar_today,
-                                color: Color.fromRGBO(29, 170, 171, 1),
-                                size: 24,
-                              ),
-                              SizedBox(
-                                height: yGap,
-                              ),
-                              const Text(
-                                'Open Everyday',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: xGap,
-                      ),
-                      Expanded(
-                        child: Container(
-                          padding: const EdgeInsets.only(
-                            left: 10,
-                            top: 20,
-                            bottom: 20,
-                          ),
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(7)),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Icon(
-                                Icons.access_time,
-                                color: Color.fromRGBO(29, 170, 171, 1),
-                                size: 24,
-                              ),
-                              SizedBox(
-                                height: yGap,
-                              ),
-                              const Text(
-                                '09.00 - 20.00',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: xGap,
-                      ),
-                      Expanded(
-                        child: Container(
-                          padding: const EdgeInsets.only(
-                            left: 10,
-                            top: 20,
-                            bottom: 20,
-                          ),
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(7)),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Icon(
-                                Icons.monetization_on,
-                                color: Color.fromRGBO(29, 170, 171, 1),
-                                size: 24,
-                              ),
-                              SizedBox(
-                                height: yGap,
-                              ),
-                              const Text(
-                                'Rp. 25.000',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                _TitleLocation(yGap),
+                _LocationFeature(yGap, xGap),
                 Container(
                   margin: EdgeInsets.only(
                     top: yGap,
@@ -191,7 +49,7 @@ class DetailScreen extends StatelessWidget {
                 ),
               ],
             ),
-            ActionButton(
+            _ActionButton(
               yGap: yGap,
               xGap: xGap,
               xPadding: xPadding,
@@ -203,15 +61,12 @@ class DetailScreen extends StatelessWidget {
   }
 }
 
-class ActionButton extends StatelessWidget {
+class _ActionButton extends StatelessWidget {
   final double yGap;
   final double xGap;
   final double xPadding;
-  const ActionButton(
-      {super.key,
-      required this.yGap,
-      required this.xGap,
-      required this.xPadding});
+  const _ActionButton(
+      {required this.yGap, required this.xGap, required this.xPadding});
 
   @override
   Widget build(BuildContext context) {
@@ -289,6 +144,167 @@ class ActionButton extends StatelessWidget {
             )
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _TitleLocation extends StatelessWidget {
+  final double yGap;
+  const _TitleLocation(this.yGap);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(
+        top: yGap,
+      ),
+      child: const Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            'Farm House Lembang',
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
+          ),
+          Row(
+            children: [
+              Icon(
+                Icons.location_on_outlined,
+                size: 15,
+                color: Color.fromRGBO(29, 170, 171, 1),
+              ),
+              Text(
+                'Lembang',
+                style: TextStyle(
+                    color: Color.fromRGBO(29, 170, 171, 1),
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500),
+              )
+            ],
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class _LocationFeature extends StatelessWidget {
+  final double yGap;
+  final double xGap;
+
+  const _LocationFeature(this.yGap, this.xGap);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(
+        top: yGap,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.only(
+                left: 10,
+                top: 20,
+                bottom: 20,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(7),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Icon(
+                    Icons.calendar_today,
+                    color: Color.fromRGBO(29, 170, 171, 1),
+                    size: 24,
+                  ),
+                  SizedBox(
+                    height: yGap,
+                  ),
+                  const Text(
+                    'Open Everyday',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500),
+                  )
+                ],
+              ),
+            ),
+          ),
+          SizedBox(
+            width: xGap,
+          ),
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.only(
+                left: 10,
+                top: 20,
+                bottom: 20,
+              ),
+              decoration: BoxDecoration(
+                  color: Colors.white, borderRadius: BorderRadius.circular(7)),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Icon(
+                    Icons.access_time,
+                    color: Color.fromRGBO(29, 170, 171, 1),
+                    size: 24,
+                  ),
+                  SizedBox(
+                    height: yGap,
+                  ),
+                  const Text(
+                    '09.00 - 20.00',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500),
+                  )
+                ],
+              ),
+            ),
+          ),
+          SizedBox(
+            width: xGap,
+          ),
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.only(
+                left: 10,
+                top: 20,
+                bottom: 20,
+              ),
+              decoration: BoxDecoration(
+                  color: Colors.white, borderRadius: BorderRadius.circular(7)),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Icon(
+                    Icons.monetization_on,
+                    color: Color.fromRGBO(29, 170, 171, 1),
+                    size: 24,
+                  ),
+                  SizedBox(
+                    height: yGap,
+                  ),
+                  const Text(
+                    'Rp. 25.000',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
