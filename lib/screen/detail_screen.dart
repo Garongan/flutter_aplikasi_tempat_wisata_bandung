@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_aplikasi_tempat_wisata_bandung/components/navigation_menu.dart';
 
 class DetailScreen extends StatelessWidget {
   const DetailScreen({super.key});
@@ -57,6 +58,7 @@ class DetailScreen extends StatelessWidget {
           ],
         ),
       ),
+      bottomNavigationBar: const NavigationMenu(),
     );
   }
 }

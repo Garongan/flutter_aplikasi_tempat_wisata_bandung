@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_aplikasi_tempat_wisata_bandung/components/navigation_menu.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -13,13 +14,14 @@ class HomeScreen extends StatelessWidget {
             Container(
                 margin: const EdgeInsets.only(top: 16.0),
                 child: const Text(
-                  'Farm House Lembang',
+                  'Home Screen',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
                 ))
           ],
         ),
       ),
+      bottomNavigationBar: const NavigationMenu(),
     );
   }
 }
