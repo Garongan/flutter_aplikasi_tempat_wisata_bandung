@@ -1,7 +1,7 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_aplikasi_tempat_wisata_bandung/screen/detail_screen.dart';
+import 'package:flutter_aplikasi_tempat_wisata_bandung/components/navigation_menu.dart';
 
 void main() {
   runApp(
@@ -19,8 +19,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Wisata Bandung",
-      theme: ThemeData(fontFamily: 'Inter'),
-      home: const DetailScreen(),
+      theme: ThemeData(
+        fontFamily: 'Inter',
+        navigationBarTheme: const NavigationBarThemeData(
+          labelTextStyle: WidgetStatePropertyAll(
+            TextStyle(
+              color: Color.fromRGBO(29, 170, 171, 1),
+              fontSize: 15,
+            ),
+          ),
+        ),
+      ),
+      home: const NavigationMenu(),
     );
   }
 }

@@ -93,7 +93,9 @@ class _ActionButton extends StatelessWidget {
                     width: 0.5,
                   )),
               child: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pop(context);
+                },
                 icon: const Icon(
                   Icons.arrow_back,
                   color: Colors.black,
