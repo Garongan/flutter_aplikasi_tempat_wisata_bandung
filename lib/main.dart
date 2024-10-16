@@ -1,15 +1,14 @@
-import 'package:device_preview/device_preview.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_aplikasi_tempat_wisata_bandung/components/navigation_menu.dart';
 
 void main() {
-  runApp(
-    DevicePreview(
-      enabled: !kReleaseMode,
-      builder: (context) => const MyApp(), // Wrap your app
-    ),
-  );
+  // runApp(
+  //   DevicePreview(
+  //     enabled: !kReleaseMode,
+  //     builder: (context) => const MyApp(), // Wrap your app
+  //   ),
+  // );
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -25,7 +24,7 @@ class MyApp extends StatelessWidget {
           labelTextStyle: WidgetStatePropertyAll(
             TextStyle(
               color: Color.fromRGBO(29, 170, 171, 1),
-              fontSize: 15,
+              fontSize: 10,
             ),
           ),
         ),

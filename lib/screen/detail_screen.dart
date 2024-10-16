@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_aplikasi_tempat_wisata_bandung/components/navigation_menu.dart';
 
 class DetailScreen extends StatelessWidget {
   const DetailScreen({super.key});
@@ -10,9 +9,9 @@ class DetailScreen extends StatelessWidget {
     final xPadding = width * 0.06;
     final xGap = width * 0.02;
     final yGap = width * 0.03;
-    return Scaffold(
-      backgroundColor: const Color.fromRGBO(239, 239, 239, 1),
-      body: SafeArea(
+    return Container(
+      color: const Color.fromRGBO(239, 239, 239, 1),
+      child: SafeArea(
         child: Stack(
           children: [
             ListView(
@@ -58,7 +57,6 @@ class DetailScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: const NavigationMenu(),
     );
   }
 }
@@ -72,82 +70,80 @@ class _ActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-        color: const Color.fromRGBO(239, 239, 239, 1),
-        padding: EdgeInsets.symmetric(
-          vertical: yGap,
-          horizontal: xPadding,
-        ),
-        height: 100,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Container(
-              padding: const EdgeInsets.all(3),
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: const Color.fromRGBO(29, 170, 171, 1),
-                    width: 0.5,
-                  )),
-              child: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: const Icon(
-                  Icons.arrow_back,
-                  color: Colors.black,
-                  size: 24,
-                ),
+    return Container(
+      color: const Color.fromRGBO(239, 239, 239, 1),
+      padding: EdgeInsets.symmetric(
+        vertical: yGap,
+        horizontal: xPadding,
+      ),
+      height: 100,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Container(
+            padding: const EdgeInsets.all(3),
+            decoration: BoxDecoration(
+                color: Colors.white,
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: const Color.fromRGBO(29, 170, 171, 1),
+                  width: 0.5,
+                )),
+            child: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(
+                Icons.arrow_back,
+                color: Colors.black,
+                size: 24,
               ),
             ),
-            Row(
-              children: <Widget>[
-                Container(
-                  padding: const EdgeInsets.all(3),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: const Color.fromRGBO(29, 170, 171, 1),
-                        width: 0.5,
-                      )),
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.bookmark_border,
-                      color: Colors.black,
-                      size: 24,
-                    ),
+          ),
+          Row(
+            children: <Widget>[
+              Container(
+                padding: const EdgeInsets.all(3),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: const Color.fromRGBO(29, 170, 171, 1),
+                      width: 0.5,
+                    )),
+                child: IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.bookmark_border,
+                    color: Colors.black,
+                    size: 24,
                   ),
                 ),
-                SizedBox(
-                  width: xGap,
-                ),
-                Container(
-                  padding: const EdgeInsets.all(3),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: const Color.fromRGBO(29, 170, 171, 1),
-                        width: 0.5,
-                      )),
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.share_outlined,
-                      color: Colors.black,
-                      size: 24,
-                    ),
+              ),
+              SizedBox(
+                width: xGap,
+              ),
+              Container(
+                padding: const EdgeInsets.all(3),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: const Color.fromRGBO(29, 170, 171, 1),
+                      width: 0.5,
+                    )),
+                child: IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.share_outlined,
+                    color: Colors.black,
+                    size: 24,
                   ),
                 ),
-              ],
-            )
-          ],
-        ),
+              ),
+            ],
+          )
+        ],
       ),
     );
   }
