@@ -46,7 +46,7 @@ class _NavigationMenuState extends State<NavigationMenu> {
           },
           selectedIndex: currentPageIndex,
           backgroundColor: Colors.white,
-          indicatorColor: Colors.white,
+          indicatorColor: Colors.transparent,
           destinations: const <Widget>[
             NavigationDestination(
               selectedIcon: Icon(

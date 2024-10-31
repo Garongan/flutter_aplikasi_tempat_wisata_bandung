@@ -376,84 +376,22 @@ class _Gallery extends StatelessWidget {
           SizedBox(
             height: yGap,
           ),
-          Column(
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(7),
-                      child: Image.network(
-                        'https://lh5.googleusercontent.com/p/AF1QipNw89HVDAQt_zsgGZG9hk3q03bRGHDPX987Z-42=w675-h390-n-k-no',
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: xGap,
-                  ),
-                  Expanded(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(7),
-                      child: Image.network(
-                        'https://lh5.googleusercontent.com/p/AF1QipO6uE8zqXK9CQxsseW0A8DwaqaZVgTEHmalO6i8=w675-h390-n-k-no',
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: yGap,
-              ),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(7),
-                      child: Image.network(
-                        'https://lh5.googleusercontent.com/p/AF1QipP0khgrBLFQHqlPGm-xCodeq7InrXfzcYoZDeL8=w675-h390-n-k-no',
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: xGap,
-                  ),
-                  Expanded(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(7),
-                      child: Image.network(
-                        'https://lh5.googleusercontent.com/p/AF1QipM3TLVvn4pCLm5rllYDwQEa525ZKFQCPdoRVM8J=w675-h390-n-k-no',
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: yGap,
-              ),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(7),
-                      child: Image.network(
-                        'https://lh5.googleusercontent.com/p/AF1QipPws5oeklKQJqx-m7YNcINfplsATug82mHkNrw7=w675-h390-n-k-no',
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: xGap,
-                  ),
-                  Expanded(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(7),
-                      child: Image.network(
-                        'https://lh5.googleusercontent.com/p/AF1QipPf7RSfYEYrGNy-q7jAx2QW1U3kSHFREMIGMdPR=w675-h390-n-k-no',
-                      ),
-                    ),
-                  ),
-                ],
-              )
-            ],
+          GridView.count(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            crossAxisCount: 2,
+            crossAxisSpacing: xGap,
+            mainAxisSpacing: yGap,
+            childAspectRatio: 1.7,
+            children: List.generate(imageUrls.length, (index) {
+              return ClipRRect(
+                borderRadius: BorderRadius.circular(7),
+                child: Image.network(
+                  imageUrls[index],
+                  fit: BoxFit.cover,
+                ),
+              );
+            }),
           ),
         ],
       ),
