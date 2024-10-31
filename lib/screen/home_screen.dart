@@ -35,10 +35,10 @@ class HomeScreen extends StatelessWidget {
           children: <Widget>[
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: <Widget>[
                 const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+                  children: <Widget>[
                     Text(
                       'Current Location',
                       style: TextStyle(fontSize: 14),
@@ -75,11 +75,142 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
             SizedBox(
-              height: xPadding,
+              height: yGap,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+                gradient: const LinearGradient(
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  colors: <Color>[
+                    Color.fromRGBO(78, 207, 184, 1),
+                    Color.fromRGBO(29, 170, 171, 1),
+                  ],
+                ),
+              ),
+              padding: const EdgeInsets.symmetric(
+                vertical: 10,
+                horizontal: 12,
+              ),
+              child: const Row(
+                children: [
+                  Icon(
+                    Icons.search,
+                    color: Colors.white,
+                  ),
+                  Text(
+                    'Search Destination',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: yGap,
+            ),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: <Widget>[
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(100),
+                      gradient: const LinearGradient(
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                        colors: <Color>[
+                          Color.fromRGBO(78, 207, 184, 1),
+                          Color.fromRGBO(29, 170, 171, 1),
+                        ],
+                      ),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 7,
+                    ),
+                    child: const Text(
+                      'Popular',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                  SizedBox(
+                    width: xGap,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(100),
+                      color: Colors.white,
+                      border: Border.all(
+                        color: const Color.fromRGBO(29, 170, 171, 1),
+                        width: 0.5,
+                      ),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 7,
+                    ),
+                    child: const Text(
+                      'Nature',
+                      style: TextStyle(color: Color.fromRGBO(29, 170, 171, 1)),
+                    ),
+                  ),
+                  SizedBox(
+                    width: xGap,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(100),
+                      color: Colors.white,
+                      border: Border.all(
+                        color: const Color.fromRGBO(29, 170, 171, 1),
+                        width: 0.5,
+                      ),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 7,
+                    ),
+                    child: const Text(
+                      'Aesthetic',
+                      style: TextStyle(color: Color.fromRGBO(29, 170, 171, 1)),
+                    ),
+                  ),
+                  SizedBox(
+                    width: xGap,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(100),
+                      color: Colors.white,
+                      border: Border.all(
+                        color: const Color.fromRGBO(29, 170, 171, 1),
+                        width: 0.5,
+                      ),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 7,
+                    ),
+                    child: const Text(
+                      'Education',
+                      style: TextStyle(color: Color.fromRGBO(29, 170, 171, 1)),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: yGap,
             ),
             Expanded(
-              child: ListView.builder(
-                itemBuilder: (context, index) {
+              child: GridView.count(
+                crossAxisCount: 2,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                crossAxisSpacing: xGap,
+                mainAxisSpacing: yGap,
+                children: List.generate(tourismPlaceData.length, (index) {
                   final TourismPlaceModel placeModel = tourismPlaceData[index];
                   return InkWell(
                     onTap: () {
@@ -93,26 +224,67 @@ class HomeScreen extends StatelessWidget {
                       );
                     },
                     child: Card(
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(7),
+                      ),
+                      elevation: 2,
+                      child: Column(
                         children: <Widget>[
-                          Expanded(
-                            child: Image.asset(placeModel.imageAsset),
+                          ClipRRect(
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(7),
+                              topRight: Radius.circular(7),
+                            ),
+                            child: Image.asset(
+                              placeModel.imageAsset,
+                              fit: BoxFit.cover,
+                              height: 100,
+                              width: double.infinity,
+                            ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(8),
+                            padding: const EdgeInsets.all(10),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisSize: MainAxisSize.min,
                               children: <Widget>[
                                 Text(
                                   placeModel.name,
-                                  style: const TextStyle(fontSize: 16),
+                                  style: const TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500),
                                 ),
                                 const SizedBox(
-                                  height: 10,
+                                  height: 2,
                                 ),
-                                Text(placeModel.location),
+                                Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.location_on_outlined,
+                                      color: Color.fromRGBO(29, 170, 171, 1),
+                                      size: 12,
+                                    ),
+                                    const SizedBox(
+                                      width: 1,
+                                    ),
+                                    Text(
+                                      placeModel.location,
+                                      style: const TextStyle(
+                                        color: Color.fromRGBO(29, 170, 171, 1),
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 12,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                Text(
+                                  placeModel.ticketPrice,
+                                  style: const TextStyle(
+                                    color: Color.fromRGBO(29, 170, 171, 1),
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 12,
+                                  ),
+                                ),
                               ],
                             ),
                           )
@@ -120,8 +292,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                   );
-                },
-                itemCount: tourismPlaceData.length,
+                }),
               ),
             ),
           ],
