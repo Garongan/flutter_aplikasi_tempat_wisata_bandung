@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_aplikasi_tempat_wisata_bandung/model/tourism_place_model.dart';
 
 class DetailScreen extends StatelessWidget {
-  const DetailScreen({super.key});
+  final TourismPlaceModel placeModel;
+
+  const DetailScreen({super.key, required this.placeModel});
 
   @override
   Widget build(BuildContext context) {
@@ -9,52 +12,66 @@ class DetailScreen extends StatelessWidget {
     final xPadding = width * 0.06;
     final xGap = width * 0.02;
     final yGap = width * 0.03;
-    return Container(
-      color: const Color.fromRGBO(239, 239, 239, 1),
-      child: SafeArea(
-        child: Stack(
-          children: [
-            ListView(
-              padding: EdgeInsets.only(
-                left: xPadding,
-                right: xPadding,
-                top: 100,
+    return Material(
+      child: Container(
+        color: const Color.fromRGBO(239, 239, 239, 1),
+        child: SafeArea(
+          child: Stack(
+            children: [
+              ListView(
+                padding: EdgeInsets.only(
+                  left: xPadding,
+                  right: xPadding,
+                  top: 100,
+                ),
+                children: <Widget>[
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(7),
+                    child: Image.asset(
+                      placeModel.imageAsset,
+                      width: width - (2 * xPadding),
+                      height: 301,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  _TitleLocation(
+                    location: placeModel.location,
+                    name: placeModel.name,
+                    yGap: yGap,
+                  ),
+                  _LocationFeature(
+                    openDays: placeModel.openDays,
+                    openTime: placeModel.openTime,
+                    ticketPrice: placeModel.ticketPrice,
+                    xGap: xGap,
+                    yGap: yGap,
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(
+                      top: yGap,
+                    ),
+                    child: Text(
+                      placeModel.description,
+                      style: const TextStyle(
+                          fontSize: 12, fontWeight: FontWeight.w500),
+                      textAlign: TextAlign.justify,
+                    ),
+                  ),
+                  _Gallery(
+                    xPadding: xPadding,
+                    yGap: yGap,
+                    xGap: xGap,
+                    imageUrls: placeModel.imageUrls,
+                  ),
+                ],
               ),
-              children: <Widget>[
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(7),
-                  child: Image.asset(
-                    'assets/images/farm_house_lembang.jpg',
-                    width: width - (2 * xPadding),
-                    height: 301,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                _TitleLocation(yGap),
-                _LocationFeature(yGap, xGap),
-                Container(
-                  margin: EdgeInsets.only(
-                    top: yGap,
-                  ),
-                  child: const Text(
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum',
-                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
-                    textAlign: TextAlign.justify,
-                  ),
-                ),
-                Gallery(
-                  xPadding: xPadding,
-                  yGap: yGap,
-                  xGap: xGap,
-                ),
-              ],
-            ),
-            _ActionButton(
-              yGap: yGap,
-              xGap: xGap,
-              xPadding: xPadding,
-            ),
-          ],
+              _ActionButton(
+                yGap: yGap,
+                xGap: xGap,
+                xPadding: xPadding,
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -151,7 +168,13 @@ class _ActionButton extends StatelessWidget {
 
 class _TitleLocation extends StatelessWidget {
   final double yGap;
-  const _TitleLocation(this.yGap);
+  final String name;
+  final String location;
+  const _TitleLocation({
+    required this.yGap,
+    required this.name,
+    required this.location,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -159,23 +182,23 @@ class _TitleLocation extends StatelessWidget {
       margin: EdgeInsets.only(
         top: yGap,
       ),
-      child: const Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            'Farm House Lembang',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
+            name,
+            style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
           ),
           Row(
             children: [
-              Icon(
+              const Icon(
                 Icons.location_on_outlined,
                 size: 15,
                 color: Color.fromRGBO(29, 170, 171, 1),
               ),
               Text(
-                'Lembang',
-                style: TextStyle(
+                location,
+                style: const TextStyle(
                     color: Color.fromRGBO(29, 170, 171, 1),
                     fontSize: 15,
                     fontWeight: FontWeight.w500),
@@ -191,8 +214,16 @@ class _TitleLocation extends StatelessWidget {
 class _LocationFeature extends StatelessWidget {
   final double yGap;
   final double xGap;
+  final String openDays;
+  final String openTime;
+  final String ticketPrice;
 
-  const _LocationFeature(this.yGap, this.xGap);
+  const _LocationFeature(
+      {required this.yGap,
+      required this.xGap,
+      required this.openDays,
+      required this.openTime,
+      required this.ticketPrice});
 
   @override
   Widget build(BuildContext context) {
@@ -225,9 +256,9 @@ class _LocationFeature extends StatelessWidget {
                   SizedBox(
                     height: yGap,
                   ),
-                  const Text(
-                    'Open Everyday',
-                    style: TextStyle(
+                  Text(
+                    openDays,
+                    style: const TextStyle(
                         color: Colors.black,
                         fontSize: 12,
                         fontWeight: FontWeight.w500),
@@ -259,9 +290,9 @@ class _LocationFeature extends StatelessWidget {
                   SizedBox(
                     height: yGap,
                   ),
-                  const Text(
-                    '09.00 - 20.00',
-                    style: TextStyle(
+                  Text(
+                    openTime,
+                    style: const TextStyle(
                         color: Colors.black,
                         fontSize: 12,
                         fontWeight: FontWeight.w500),
@@ -293,9 +324,9 @@ class _LocationFeature extends StatelessWidget {
                   SizedBox(
                     height: yGap,
                   ),
-                  const Text(
-                    'Rp. 25.000',
-                    style: TextStyle(
+                  Text(
+                    ticketPrice,
+                    style: const TextStyle(
                         color: Colors.black,
                         fontSize: 12,
                         fontWeight: FontWeight.w500),
@@ -310,15 +341,16 @@ class _LocationFeature extends StatelessWidget {
   }
 }
 
-class Gallery extends StatelessWidget {
+class _Gallery extends StatelessWidget {
   final double xPadding;
   final double yGap;
   final double xGap;
-  const Gallery(
-      {super.key,
-      required this.xPadding,
+  final List<String> imageUrls;
+  const _Gallery(
+      {required this.xPadding,
       required this.yGap,
-      required this.xGap});
+      required this.xGap,
+      required this.imageUrls});
 
   @override
   Widget build(BuildContext context) {
