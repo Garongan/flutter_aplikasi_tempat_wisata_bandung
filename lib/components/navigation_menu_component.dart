@@ -17,6 +17,7 @@ class _NavigationMenuState extends State<NavigationMenu> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromRGBO(29, 170, 171, 1),
       body: <Widget>[
         const HomeScreen(),
         const TransactionScreen(),

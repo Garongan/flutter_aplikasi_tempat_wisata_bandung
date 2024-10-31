@@ -14,61 +14,77 @@ class DetailScreen extends StatelessWidget {
     final yGap = width * 0.03;
     return Material(
       child: Container(
-        color: const Color.fromRGBO(239, 239, 239, 1),
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: <Color>[
+              Color.fromRGBO(29, 170, 171, 1),
+              Color.fromRGBO(239, 239, 239, 1),
+              Color.fromRGBO(239, 239, 239, 1),
+              Color.fromRGBO(239, 239, 239, 1),
+            ],
+          ),
+        ),
         child: SafeArea(
-          child: Stack(
+          child: Column(
             children: [
-              ListView(
-                padding: EdgeInsets.only(
-                  left: xPadding,
-                  right: xPadding,
-                  top: 100,
-                ),
-                children: <Widget>[
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(7),
-                    child: Image.asset(
-                      placeModel.imageAsset,
-                      width: width - (2 * xPadding),
-                      height: 301,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  _TitleLocation(
-                    location: placeModel.location,
-                    name: placeModel.name,
-                    yGap: yGap,
-                  ),
-                  _LocationFeature(
-                    openDays: placeModel.openDays,
-                    openTime: placeModel.openTime,
-                    ticketPrice: placeModel.ticketPrice,
-                    xGap: xGap,
-                    yGap: yGap,
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(
-                      top: yGap,
-                    ),
-                    child: Text(
-                      placeModel.description,
-                      style: const TextStyle(
-                          fontSize: 12, fontWeight: FontWeight.w500),
-                      textAlign: TextAlign.justify,
-                    ),
-                  ),
-                  _Gallery(
-                    xPadding: xPadding,
-                    yGap: yGap,
-                    xGap: xGap,
-                    imageUrls: placeModel.imageUrls,
-                  ),
-                ],
-              ),
               _ActionButton(
                 yGap: yGap,
                 xGap: xGap,
                 xPadding: xPadding,
+              ),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Container(
+                    padding: EdgeInsets.only(
+                      left: xPadding,
+                      right: xPadding,
+                    ),
+                    child: Column(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(7),
+                          child: Image.asset(
+                            placeModel.imageAsset,
+                            width: width - (2 * xPadding),
+                            height: 301,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        _TitleLocation(
+                          location: placeModel.location,
+                          name: placeModel.name,
+                          yGap: yGap,
+                        ),
+                        _LocationFeature(
+                          openDays: placeModel.openDays,
+                          openTime: placeModel.openTime,
+                          ticketPrice: placeModel.ticketPrice,
+                          xGap: xGap,
+                          yGap: yGap,
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(
+                            top: yGap,
+                          ),
+                          child: Text(
+                            placeModel.description,
+                            style: const TextStyle(
+                                fontSize: 12, fontWeight: FontWeight.w500),
+                            textAlign: TextAlign.justify,
+                          ),
+                        ),
+                        _Gallery(
+                          xPadding: xPadding,
+                          yGap: yGap,
+                          xGap: xGap,
+                          imageUrls: placeModel.imageUrls,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ),
             ],
           ),
@@ -88,12 +104,10 @@ class _ActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color.fromRGBO(239, 239, 239, 1),
       padding: EdgeInsets.symmetric(
         vertical: yGap,
         horizontal: xPadding,
       ),
-      height: 100,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
