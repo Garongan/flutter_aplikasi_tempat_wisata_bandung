@@ -16,7 +16,6 @@ class HomeScreen extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.symmetric(
           horizontal: xPadding,
-          vertical: yGap,
         ),
         decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -31,7 +30,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
         margin: const EdgeInsets.only(top: 16.0),
-        child: Column(
+        child: ListView(
           children: <Widget>[
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -203,98 +202,99 @@ class HomeScreen extends StatelessWidget {
             SizedBox(
               height: yGap,
             ),
-            Expanded(
-              child: GridView.count(
-                crossAxisCount: 2,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                crossAxisSpacing: xGap,
-                mainAxisSpacing: yGap,
-                children: List.generate(tourismPlaceData.length, (index) {
-                  final TourismPlaceModel placeModel = tourismPlaceData[index];
-                  return InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => DetailScreen(
-                            placeModel: placeModel,
+            GridView.count(
+              crossAxisCount: 2,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              crossAxisSpacing: xGap,
+              mainAxisSpacing: yGap,
+              childAspectRatio: 0.9,
+              children: List.generate(tourismPlaceData.length, (index) {
+                final TourismPlaceModel placeModel = tourismPlaceData[index];
+                return InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DetailScreen(
+                          placeModel: placeModel,
+                        ),
+                      ),
+                    );
+                  },
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(7),
+                    ),
+                    elevation: 2,
+                    child: Column(
+                      children: <Widget>[
+                        ClipRRect(
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(7),
+                            topRight: Radius.circular(7),
+                          ),
+                          child: Image.asset(
+                            placeModel.imageAsset,
+                            fit: BoxFit.cover,
+                            height: 100,
+                            width: double.infinity,
                           ),
                         ),
-                      );
-                    },
-                    child: Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(7),
-                      ),
-                      elevation: 2,
-                      child: Column(
-                        children: <Widget>[
-                          ClipRRect(
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(7),
-                              topRight: Radius.circular(7),
-                            ),
-                            child: Image.asset(
-                              placeModel.imageAsset,
-                              fit: BoxFit.cover,
-                              height: 100,
-                              width: double.infinity,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.min,
-                              children: <Widget>[
-                                Text(
-                                  placeModel.name,
-                                  style: const TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                const SizedBox(
-                                  height: 2,
-                                ),
-                                Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.location_on_outlined,
-                                      color: Color.fromRGBO(29, 170, 171, 1),
-                                      size: 12,
-                                    ),
-                                    const SizedBox(
-                                      width: 1,
-                                    ),
-                                    Text(
-                                      placeModel.location,
-                                      style: const TextStyle(
-                                        color: Color.fromRGBO(29, 170, 171, 1),
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 12,
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                Text(
-                                  placeModel.ticketPrice,
-                                  style: const TextStyle(
+                        Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              Text(
+                                placeModel.name,
+                                style: const TextStyle(
+                                    fontSize: 14, fontWeight: FontWeight.w500),
+                              ),
+                              const SizedBox(
+                                height: 2,
+                              ),
+                              Row(
+                                children: [
+                                  const Icon(
+                                    Icons.location_on_outlined,
                                     color: Color.fromRGBO(29, 170, 171, 1),
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 12,
+                                    size: 12,
                                   ),
+                                  const SizedBox(
+                                    width: 1,
+                                  ),
+                                  Text(
+                                    placeModel.location,
+                                    style: const TextStyle(
+                                      color: Color.fromRGBO(29, 170, 171, 1),
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 12,
+                                    ),
+                                  )
+                                ],
+                              ),
+                              Text(
+                                placeModel.ticketPrice,
+                                style: const TextStyle(
+                                  color: Color.fromRGBO(29, 170, 171, 1),
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 12,
                                 ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
                     ),
-                  );
-                }),
-              ),
+                  ),
+                );
+              }),
             ),
+            SizedBox(
+              height: yGap,
+            )
           ],
         ),
       ),
