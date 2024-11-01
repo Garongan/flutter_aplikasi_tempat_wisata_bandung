@@ -44,11 +44,13 @@ class DetailScreen extends StatelessWidget {
                     children: [
                       ClipRRect(
                         borderRadius: BorderRadius.circular(7),
-                        child: Image.asset(
-                          placeModel.imageAsset,
-                          width: width - (2 * xPadding),
-                          height: 301,
-                          fit: BoxFit.cover,
+                        child: AspectRatio(
+                          aspectRatio: 1.7,
+                          child: Image.asset(
+                            placeModel.imageAsset,
+                            width: width - (2 * xPadding),
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                       _TitleLocation(
