@@ -109,4 +109,40 @@ var tourismPlaceData = [
       'https://lh3.googleusercontent.com/p/AF1QipNmKhmF0Il4YYLiLe81JtwYBBrqviaa8kVYlRQ9=s1360-w1360-h1020',
     ],
   ),
+  TourismPlaceModel(
+    name: 'Kawah Putih',
+    location: 'Ciwidey',
+    description:
+        'Kawah Putih adalah sebuah tempat wisata di Jawa Barat yang terletak di Desa Alam Endah, Kecamatan Rancabali, Kabupaten Bandung Jawa Barat yang terletak di kaki Gunung Patuha. Kawah putih merupakan sebuah danau yang terbentuk dari letusan Gunung Patuha.',
+    openDays: 'Open Everyday',
+    openTime: '07:00 - 17:00',
+    ticketPrice: 'Rp 15.000',
+    imageAsset: 'assets/images/kawah_putih.jpg',
+    imageUrls: [
+      'https://encrypted-tbn3.gstatic.com/licensed-image?q=tbn:ANd9GcTieZiLZkVmGFt9BSvw973KMlOZtRVbxWeuCmtQNhAweLz5ggZaBtt8vVufmQz-NFiMm_HNh7pyc7zmZ6J5uzWmAKinG0Y2zqynF_VggQ',
+      'https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcQ6vH_erEsBnV3095PBRUvABrSw-z0SCaZp3NBU5NHS8ZMwsz_UtrejY6dTM5UWkU4bYAniLnH7km3fNLClWKB9wvaWPj6nsoDSwTt9bA',
+      'https://lh5.googleusercontent.com/p/AF1QipP6CejwjqBLvQK_nAVTyDdDOu9MNvl26KdAbfVa=w675-h390-n-k-no',
+      'https://lh5.googleusercontent.com/p/AF1QipMYM761ZwIAIQV2AjIocMtmKIsWhwKjhVTlwT7W=w675-h390-n-k-no',
+      'https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcSqSTAUFDP6mQ-QT070mgP1ONyfSzdCnyGRL27acKyQ49iNftLWWoQwwIlNO5Q93a3j_9oMf-4Esbp_Vr0N2NFRNqT1HgrhOLpSopMU2Q',
+      'https://encrypted-tbn3.gstatic.com/licensed-image?q=tbn:ANd9GcQiIkSgu6sUZSqJs4okIGM7p0v4-XMtHKDb9gAWyWVyEuqsN_YfuW9-tQPj-qSxvHIxg3DMCXjJcDhyY_fGaKEQ5MvxwS5x1jEy7iBD7g',
+    ],
+  ),
+  TourismPlaceModel(
+    name: 'Ranca Upas',
+    location: 'Ciwidey',
+    description:
+        'Ranca Upas atau Kampung Cai Ranca Upas adalah salah satu bumi perkemahan di Bandung, Jawa Barat, Indonesia. Terletak di Jalan Raya Ciwidey Patenggang KM. 11, Alam Endah, Ciwidey Kabupaten Bandung, dengan jarak sekitar 50 km dari pusat Kota Bandung.',
+    openDays: 'Open Everyday',
+    openTime: '24 hours',
+    ticketPrice: 'Rp 20.000',
+    imageAsset: 'assets/images/ranca_upas.jpg',
+    imageUrls: [
+      'https://lh3.googleusercontent.com/p/AF1QipOhW_BKgrqlDjxjhMjWeHwtu7Xa2Ky3TJ_cY4H4=s1360-w1360-h1020',
+      'https://lh3.googleusercontent.com/p/AF1QipNonCv3rYjWdkMpNAi2b1_EEJ3bpo8HNutfXM4e=s1360-w1360-h1020',
+      'https://lh3.googleusercontent.com/p/AF1QipPbn453-_OAnizY6TvUGseEMwE43MPz8bobxV49=s1360-w1360-h1020',
+      'https://lh3.googleusercontent.com/p/AF1QipMN4t8sZuDz62dZe6ZOeBHA2PQcVpOBvfeyHNdg=s1360-w1360-h1020',
+      'https://lh3.googleusercontent.com/p/AF1QipNWbfwRn9FRcD6aLBnG-UPxOvCr9GnIVmva_yCm=s1360-w1360-h1020',
+      'https://lh3.googleusercontent.com/p/AF1QipPZupu-pcVZ1sjGPf6b2Gl5dGrYUPwGKNjF1bNq=s1360-w1360-h1020',
+    ],
+  ),
 ];
