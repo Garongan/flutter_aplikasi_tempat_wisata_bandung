@@ -5,7 +5,7 @@ class BookmarkScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return Material(
       child: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -21,11 +21,12 @@ class BookmarkScreen extends StatelessWidget {
         ),
         width: double.infinity,
         height: double.infinity,
-        margin: const EdgeInsets.only(top: 16.0),
-        child: const Text(
-          'Bookmark Screen',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
+        child: const SafeArea(
+          child: Text(
+            'Bookmark Screen',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
+          ),
         ),
       ),
     );

@@ -24,71 +24,40 @@ class DetailScreen extends StatelessWidget {
             end: Alignment.bottomCenter,
             colors: <Color>[
               Color.fromRGBO(29, 170, 171, 1),
-              Color.fromRGBO(239, 239, 239, 1),
-              Color.fromRGBO(239, 239, 239, 1),
-              Color.fromRGBO(239, 239, 239, 1),
+              Colors.white,
+              Colors.white,
+              Colors.white,
             ],
           ),
         ),
-        child: SafeArea(
-          child: Column(
-            children: [
-              _ActionButton(
-                yGap: yGap,
-                xGap: xGap,
-                xPadding: xPadding,
-              ),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(7),
-                        child: AspectRatio(
-                          aspectRatio: 1.7,
-                          child: Image.asset(
-                            placeModel.imageAsset,
-                            width: width - (2 * xPadding),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                      _TitleLocation(
-                        location: placeModel.location,
-                        name: placeModel.name,
-                        yGap: yGap,
-                      ),
-                      _LocationFeature(
-                        openDays: placeModel.openDays,
-                        openTime: placeModel.openTime,
-                        ticketPrice: placeModel.ticketPrice,
-                        xGap: xGap,
-                        yGap: yGap,
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(
-                          top: yGap,
-                        ),
-                        child: Text(
-                          placeModel.description,
-                          style: const TextStyle(
-                              fontSize: 12, fontWeight: FontWeight.w500),
-                          textAlign: TextAlign.justify,
-                        ),
-                      ),
-                      _Gallery(
-                        xPadding: xPadding,
-                        yGap: yGap,
-                        xGap: xGap,
-                        imageUrls: placeModel.imageUrls,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
+        child: SafeArea(child: LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constrains) {
+          if (constrains.maxWidth > 1200) {
+            return _DekstopDetail(
+              width: width,
+              yGap: (yGap / 2),
+              xGap: (xGap / 2),
+              xPadding: xPadding,
+              placeModel: placeModel,
+            );
+          } else if (constrains.maxWidth > 600) {
+            return _TabletDetail(
+              width: width,
+              yGap: yGap,
+              xGap: xGap,
+              xPadding: xPadding,
+              placeModel: placeModel,
+            );
+          } else {
+            return _MobileDetail(
+              width: width,
+              yGap: yGap,
+              xGap: xGap,
+              xPadding: xPadding,
+              placeModel: placeModel,
+            );
+          }
+        })),
       ),
     );
   }
@@ -183,10 +152,12 @@ class _TitleLocation extends StatelessWidget {
   final double yGap;
   final String name;
   final String location;
+  final double titleSize;
   const _TitleLocation({
     required this.yGap,
     required this.name,
     required this.location,
+    required this.titleSize,
   });
 
   @override
@@ -200,20 +171,20 @@ class _TitleLocation extends StatelessWidget {
         children: <Widget>[
           Text(
             name,
-            style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
+            style: TextStyle(fontSize: titleSize, fontWeight: FontWeight.w500),
           ),
           Row(
             children: [
-              const Icon(
+              Icon(
                 Icons.location_on_outlined,
-                size: 15,
-                color: Color.fromRGBO(29, 170, 171, 1),
+                size: (titleSize - 8),
+                color: const Color.fromRGBO(29, 170, 171, 1),
               ),
               Text(
                 location,
-                style: const TextStyle(
-                    color: Color.fromRGBO(29, 170, 171, 1),
-                    fontSize: 15,
+                style: TextStyle(
+                    color: const Color.fromRGBO(29, 170, 171, 1),
+                    fontSize: (titleSize - 8),
                     fontWeight: FontWeight.w500),
               )
             ],
@@ -229,14 +200,19 @@ class _LocationFeature extends StatelessWidget {
   final double xGap;
   final String openDays;
   final String openTime;
+  final double childAspectRatio;
   final String ticketPrice;
+  final double iconSize;
 
-  const _LocationFeature(
-      {required this.yGap,
-      required this.xGap,
-      required this.openDays,
-      required this.openTime,
-      required this.ticketPrice});
+  const _LocationFeature({
+    required this.yGap,
+    required this.xGap,
+    required this.openDays,
+    required this.openTime,
+    required this.ticketPrice,
+    required this.childAspectRatio,
+    required this.iconSize,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -244,108 +220,103 @@ class _LocationFeature extends StatelessWidget {
       margin: EdgeInsets.only(
         top: yGap,
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: GridView.count(
+        crossAxisCount: 3,
+        shrinkWrap: true,
+        crossAxisSpacing: xGap,
+        childAspectRatio: childAspectRatio,
         children: <Widget>[
-          Expanded(
-            child: Container(
-              padding: const EdgeInsets.only(
-                left: 10,
-                top: 20,
-                bottom: 20,
+          Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: xGap,
+              vertical: yGap,
+            ),
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: const Color.fromRGBO(29, 170, 171, 0.5),
+                width: 0.5,
               ),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(7),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Icon(
-                    Icons.calendar_today,
-                    color: Color.fromRGBO(29, 170, 171, 1),
-                    size: 24,
-                  ),
-                  SizedBox(
-                    height: yGap,
-                  ),
-                  Text(
-                    openDays,
-                    style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500),
-                  )
-                ],
-              ),
+              borderRadius: BorderRadius.circular(7),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Icon(
+                  Icons.calendar_today,
+                  color: const Color.fromRGBO(29, 170, 171, 1),
+                  size: iconSize,
+                ),
+                Text(
+                  openDays,
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: (iconSize - 12),
+                      fontWeight: FontWeight.w500),
+                )
+              ],
             ),
           ),
-          SizedBox(
-            width: xGap,
-          ),
-          Expanded(
-            child: Container(
-              padding: const EdgeInsets.only(
-                left: 10,
-                top: 20,
-                bottom: 20,
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: xGap, vertical: yGap),
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: const Color.fromRGBO(29, 170, 171, 0.5),
+                width: 0.5,
               ),
-              decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(7)),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Icon(
-                    Icons.access_time,
-                    color: Color.fromRGBO(29, 170, 171, 1),
-                    size: 24,
-                  ),
-                  SizedBox(
-                    height: yGap,
-                  ),
-                  Text(
-                    openTime,
-                    style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500),
-                  )
-                ],
-              ),
+              borderRadius: BorderRadius.circular(7),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Icon(
+                  Icons.access_time,
+                  color: const Color.fromRGBO(29, 170, 171, 1),
+                  size: iconSize,
+                ),
+                Text(
+                  openTime,
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: (iconSize - 12),
+                      fontWeight: FontWeight.w500),
+                )
+              ],
             ),
           ),
-          SizedBox(
-            width: xGap,
-          ),
-          Expanded(
-            child: Container(
-              padding: const EdgeInsets.only(
-                left: 10,
-                top: 20,
-                bottom: 20,
+          Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: xGap,
+              vertical: yGap,
+            ),
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: const Color.fromRGBO(29, 170, 171, 0.5),
+                width: 0.5,
               ),
-              decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(7)),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Icon(
-                    Icons.monetization_on,
-                    color: Color.fromRGBO(29, 170, 171, 1),
-                    size: 24,
-                  ),
-                  SizedBox(
-                    height: yGap,
-                  ),
-                  Text(
-                    ticketPrice,
-                    style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500),
-                  )
-                ],
-              ),
+              borderRadius: BorderRadius.circular(7),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Icon(
+                  Icons.monetization_on,
+                  color: const Color.fromRGBO(29, 170, 171, 1),
+                  size: iconSize,
+                ),
+                Text(
+                  ticketPrice,
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: (iconSize - 12),
+                      fontWeight: FontWeight.w500),
+                )
+              ],
             ),
           ),
         ],
@@ -358,12 +329,15 @@ class _Gallery extends StatelessWidget {
   final double xPadding;
   final double yGap;
   final double xGap;
+  final int gridCount;
   final List<String> imageUrls;
-  const _Gallery(
-      {required this.xPadding,
-      required this.yGap,
-      required this.xGap,
-      required this.imageUrls});
+  const _Gallery({
+    required this.xPadding,
+    required this.yGap,
+    required this.xGap,
+    required this.imageUrls,
+    required this.gridCount,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -392,7 +366,7 @@ class _Gallery extends StatelessWidget {
           GridView.count(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            crossAxisCount: 2,
+            crossAxisCount: gridCount,
             crossAxisSpacing: xGap,
             mainAxisSpacing: yGap,
             childAspectRatio: 1.7,
@@ -408,6 +382,269 @@ class _Gallery extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _MobileDetail extends StatelessWidget {
+  final double width;
+  final double yGap;
+  final double xGap;
+  final double xPadding;
+  final TourismPlaceModel placeModel;
+
+  const _MobileDetail({
+    required this.width,
+    required this.yGap,
+    required this.xGap,
+    required this.xPadding,
+    required this.placeModel,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        _ActionButton(
+          yGap: yGap,
+          xGap: xGap,
+          xPadding: xPadding,
+        ),
+        Expanded(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(7),
+                  child: AspectRatio(
+                    aspectRatio: 1.7,
+                    child: Image.asset(
+                      placeModel.imageAsset,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                _TitleLocation(
+                  location: placeModel.location,
+                  name: placeModel.name,
+                  yGap: yGap,
+                  titleSize: 24,
+                ),
+                _LocationFeature(
+                  openDays: placeModel.openDays,
+                  openTime: placeModel.openTime,
+                  ticketPrice: placeModel.ticketPrice,
+                  xGap: xGap,
+                  yGap: yGap,
+                  iconSize: 24,
+                  childAspectRatio: 1.5,
+                ),
+                Container(
+                  margin: EdgeInsets.only(
+                    top: yGap,
+                  ),
+                  child: Text(
+                    placeModel.description,
+                    style: const TextStyle(
+                        fontSize: 12, fontWeight: FontWeight.w500),
+                    textAlign: TextAlign.justify,
+                  ),
+                ),
+                _Gallery(
+                  xPadding: xPadding,
+                  yGap: yGap,
+                  xGap: xGap,
+                  gridCount: 2,
+                  imageUrls: placeModel.imageUrls,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _TabletDetail extends StatelessWidget {
+  final double width;
+  final double yGap;
+  final double xGap;
+  final double xPadding;
+  final TourismPlaceModel placeModel;
+
+  const _TabletDetail({
+    required this.width,
+    required this.yGap,
+    required this.xGap,
+    required this.xPadding,
+    required this.placeModel,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        _ActionButton(
+          yGap: yGap,
+          xGap: xGap,
+          xPadding: xPadding,
+        ),
+        Expanded(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(7),
+                  child: AspectRatio(
+                    aspectRatio: 1.7,
+                    child: Image.asset(
+                      placeModel.imageAsset,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                _TitleLocation(
+                  location: placeModel.location,
+                  name: placeModel.name,
+                  yGap: yGap,
+                  titleSize: 32,
+                ),
+                _LocationFeature(
+                  openDays: placeModel.openDays,
+                  openTime: placeModel.openTime,
+                  ticketPrice: placeModel.ticketPrice,
+                  xGap: xGap,
+                  yGap: yGap,
+                  childAspectRatio: 1.7,
+                  iconSize: 32,
+                ),
+                Container(
+                  margin: EdgeInsets.only(
+                    top: yGap,
+                  ),
+                  child: Text(
+                    placeModel.description,
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.w500),
+                    textAlign: TextAlign.justify,
+                  ),
+                ),
+                _Gallery(
+                  xPadding: xPadding,
+                  yGap: yGap,
+                  xGap: xGap,
+                  gridCount: 3,
+                  imageUrls: placeModel.imageUrls,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _DekstopDetail extends StatelessWidget {
+  final double width;
+  final double yGap;
+  final double xGap;
+  final double xPadding;
+  final TourismPlaceModel placeModel;
+
+  const _DekstopDetail({
+    required this.width,
+    required this.yGap,
+    required this.xGap,
+    required this.xPadding,
+    required this.placeModel,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        _ActionButton(
+          yGap: yGap,
+          xGap: xGap,
+          xPadding: xPadding,
+        ),
+        Expanded(
+          child: Row(
+            children: <Widget>[
+              ClipRRect(
+                borderRadius: BorderRadius.circular(7),
+                child: AspectRatio(
+                  aspectRatio: 0.7,
+                  child: Image.asset(
+                    placeModel.imageAsset,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: xGap,
+              ),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(7),
+                      border: Border.all(
+                        color: const Color.fromRGBO(29, 170, 171, 0.5),
+                        width: 0.5
+                      )
+                    ),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: xGap,
+                      vertical: yGap,
+                    ),
+                    child: Column(
+                      children: [
+                        _TitleLocation(
+                          location: placeModel.location,
+                          name: placeModel.name,
+                          yGap: 0,
+                          titleSize: 32,
+                        ),
+                        _LocationFeature(
+                          openDays: placeModel.openDays,
+                          openTime: placeModel.openTime,
+                          ticketPrice: placeModel.ticketPrice,
+                          xGap: xGap,
+                          yGap: yGap,
+                          childAspectRatio: 2,
+                          iconSize: 32,
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(
+                            top: yGap,
+                          ),
+                          child: Text(
+                            placeModel.description,
+                            style: const TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.w500),
+                            textAlign: TextAlign.justify,
+                          ),
+                        ),
+                        _Gallery(
+                          xPadding: xPadding,
+                          yGap: yGap,
+                          xGap: xGap,
+                          gridCount: 4,
+                          imageUrls: placeModel.imageUrls,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
